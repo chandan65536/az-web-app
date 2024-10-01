@@ -70,7 +70,7 @@ export class UserGameState {
             maxLevel = Math.max(this._gameState.highestLevel, maxLevel);
             this._gameState.highestLevel = maxLevel;
 
-            if(["basic", "pcf", "pcf-soft"].indexOf(this._gameState.settings.shadowType) == -1){
+            if(["basic", "pcf", "pcf-soft"].indexOf(this._gameState.settings.shadowType) === -1){
                 this._gameState.settings.shadowType = "basic";
             }
 

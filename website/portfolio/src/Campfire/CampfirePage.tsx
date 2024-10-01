@@ -6,8 +6,8 @@ function CampfirePage() {
     return (<div>
         <Nav/>
         <MainContent />
-        <NextLevel_modalTemplate/>
-        <Help_modalTemplate />
+        <NextLevelModalTemplate/>
+        <HelpModalTemplate />
     </div>
     );
 }
@@ -75,7 +75,7 @@ function Nav() {
                 <a className="nav-link " aria-current="page" href="../">Home</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href="#"><span>&#128293;</span> Campfire</a>
+                <a className="nav-link active" href="#self"><span>&#128293;</span> Campfire</a>
               </li>
               <li className="nav-item">
                 <button className="btn btn-outline-success" 
@@ -90,7 +90,7 @@ function Nav() {
       </nav>);
 }
 
-function Help_modalTemplate() {
+function HelpModalTemplate() {
     return (<div className="modal fade" id="gameHelpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content">
@@ -110,7 +110,7 @@ function Help_modalTemplate() {
     );
 }
 
-function NextLevel_modalTemplate() {
+function NextLevelModalTemplate() {
     return (<div className="modal fade" id="gameLevelCompleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content">

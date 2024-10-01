@@ -30,7 +30,7 @@ function HomePage(){
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="btn-group">
                     <Link to='./campfire' className='btn btn-sm btn-outline-primary'>Play</Link>
-                    <a className="btn btn-sm btn-outline-secondary" href="https://github.com/chandan65536/webapp/blob/main/apps/Campfire.html" target="_blank">Source</a>
+                    <a className="btn btn-sm btn-outline-secondary" href="https://github.com/chandan65536/az-web-app/tree/main/website/portfolio/src/Campfire" target="_blank" rel="noreferrer">Source</a>
                   </div>
                 </div>
               </div>

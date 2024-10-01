@@ -150,9 +150,9 @@ export class GameEngine {
             let shadowType = this._gameUserState.getState().settings.shadowType;
             this._renderer.shadowMap.enabled = true;
 
-            if (shadowType == "pcf") {
+            if (shadowType === "pcf") {
                 this._renderer.shadowMap.type = THREE.PCFShadowMap;
-            } else if (shadowType == "pcf-soft") {
+            } else if (shadowType === "pcf-soft") {
                 this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
             } else {
                 this._renderer.shadowMap.type = THREE.BasicShadowMap;
@@ -230,7 +230,7 @@ export class GameEngine {
                 const root = gltf.scene;
                 this._scene.add(root);
                 root.traverse(obj => {
-                    if(obj.castShadow == false && obj.type == "Mesh") {
+                    if(obj.castShadow === false && obj.type === "Mesh") {
                         obj.castShadow = true;
                         obj.receiveShadow = true;
                     }
@@ -244,7 +244,7 @@ export class GameEngine {
                     this.__lastTime = performance.now();
                     this.__isReady = true;
 
-                    if(this.__currentLevel == 0) {
+                    if(this.__currentLevel === 0) {
                         // if this is first level, show tutorial
                         setTimeout(() => this._gameUI.showHelp(), 250);
                     }
@@ -360,7 +360,7 @@ export class GameEngine {
 
                 let pos = new THREE.Vector3(this._gridXFromState(x), this._laserBeamHeight, this._gridYFromState(y));
 
-                if(y == 0) laserObjTop.scale.set(2.75,1,1);
+                if(y === 0) laserObjTop.scale.set(2.75,1,1);
                 else laserObjTop.scale.set(0.5,1,1);
 
                 laserObjTop.rotateY(Math.PI/2);
@@ -376,7 +376,7 @@ export class GameEngine {
                 laserObjBottom.rotateY(-Math.PI/2);
                 laserObjBottom.position.set(pos.x, pos.y, pos.z);
 
-                if(x == 0) laserObjLeft.scale.set(2.75,1,1);
+                if(x === 0) laserObjLeft.scale.set(2.75,1,1);
                 else laserObjLeft.scale.set(0.5,1,1);
                 laserObjLeft.rotateY(-2*Math.PI/2);
                 laserObjLeft.position.set(pos.x, pos.y, pos.z);
@@ -528,7 +528,7 @@ export class GameEngine {
 
     _onMouseMove(evt: MouseEvent) {
 
-        if(evt.buttons != 0 || this._gameState?._isSolved) return;
+        if(evt.buttons !== 0 || this._gameState?._isSolved) return;
 
         var raycaster = new THREE.Raycaster(); 
         var mouse = new THREE.Vector2(); 

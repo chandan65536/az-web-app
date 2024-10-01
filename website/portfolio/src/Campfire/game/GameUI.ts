@@ -19,7 +19,7 @@ Handlebars.registerHelper('isEq', (exp1, exp2) => {
     let v1 = Handlebars.escapeExpression(exp1);
     let v2 = Handlebars.escapeExpression(exp2);
 
-    return v1 == v2;
+    return v1 === v2;
 });
 
 export class GameUI {
@@ -51,7 +51,7 @@ export class GameUI {
             
             if(gs !=null && el !=null) {
                 let tmplData: any = {...gs};
-                tmplData.isFinalLevel = gs.currentLevel == GameConstants.MaxLevel;
+                tmplData.isFinalLevel = gs.currentLevel === GameConstants.MaxLevel;
                 el.innerHTML = this._tmplLevelComplete(tmplData);
             }
 
@@ -91,7 +91,7 @@ export class GameUI {
             if(className.indexOf("game-action--button") > -1) {
                 let act = el.getAttribute("data-action");
 
-                if (act == "player-name-update") {
+                if (act === "player-name-update") {
                     let newName = (this._helpEl.querySelector("#game-setting--player-name") as HTMLInputElement)?.value || "";
 
                     if(newName.length > 0) {
@@ -103,7 +103,7 @@ export class GameUI {
                         if(successEl !=null) successEl.style.visibility = 'visible';
                     }
                 }
-                else if (act == "apply-settings") {
+                else if (act === "apply-settings") {
                     let gs = new UserGameState();
                     let cs = gs.getState();
                     cs.settings.enableShadows = 
@@ -127,7 +127,7 @@ export class GameUI {
             let el = evt.target as HTMLElement;
             let elId = el.id;
 
-            if(elId == "game-setting--enable-shadow-checkbox") {
+            if(elId === "game-setting--enable-shadow-checkbox") {
                 // shadow enable checkbox changed
                 let isEnabled = (el as HTMLInputElement).checked;
                 this.__updateViewOnShadowSettingChanged(isEnabled);
@@ -135,16 +135,17 @@ export class GameUI {
         });
 
         this._completeEl.addEventListener('click', evt => {
+            evt.stopImmediatePropagation();
             let el = evt.target as HTMLElement; 
             let className = el?.getAttribute('class') || "";
             
             if(className.indexOf("game-action--button") > -1) {
                 let act = el.getAttribute("data-action");
 
-                if(act == "main-menu") {
+                if(act === "main-menu") {
                     alert("Quitting, i.e. closing the application");
                     window.location.assign("/");
-                } else if (act == "next-level") {
+                } else if (act === "next-level") {
                     let gs = new UserGameState();
                     let localState = gs.getState();
 
@@ -156,7 +157,7 @@ export class GameUI {
                     
                     gs.updateState(localState);
                     window.location.reload();
-                } else if (act == "player-name-update") {
+                } else if (act === "player-name-update") {
                     let newName = (this._completeEl.querySelector("#game-setting--player-name") as HTMLInputElement)?.value || "";
 
                     if(newName.length > 0) {
@@ -179,7 +180,7 @@ export class GameUI {
                 let act = el.getAttribute("data-action") || "";
                 let val = el.getAttribute("data-action-value") || "";
 
-                if(act == "navigate-level") {
+                if(act === "navigate-level") {
                     let newLevel = parseInt(val);
                     let gs = new UserGameState();
                     let state = gs.getState();
@@ -219,8 +220,8 @@ export class GameUI {
         let maxLevel = cs.highestLevel;
 
         for(let i=0; i<= maxLevel; ++i) {
-            let isCurrentLevel = i == currentLevel;
-            let isLastLevel = i == GameConstants.MaxLevel;
+            let isCurrentLevel = i === currentLevel ? true : false;
+            let isLastLevel = i === GameConstants.MaxLevel ? true : false;
             prevLevels.push({levelNum: i, isCurrentLevel: isCurrentLevel, isLastLevel: isLastLevel});
         }
 

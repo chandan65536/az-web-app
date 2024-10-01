@@ -107,7 +107,7 @@ export class GameState {
 
         let n = this._nodes[y][x];
 
-        if(n.hasDiamond && n.objectOrientation != nextOrientation) {
+        if(n.hasDiamond && n.objectOrientation !== nextOrientation) {
             n.objectOrientation = nextOrientation;
             this._cleanLightPath();
             this._computeLightPath();
@@ -133,18 +133,18 @@ export class GameState {
                 hasLightObstacle: false
               };
 
-              if(val == 11 || val == 12 || val == 13 || val == 14) {
+              if(val === 11 || val === 12 || val === 13 || val === 14) {
                 this._lightSource = nodeInfo;
                 nodeInfo.hasLightSource = true;
                 nodeInfo.objectOrientation = (val%10);
-              } else if (val == 21) {
+              } else if (val === 21) {
                 nodeInfo.hasLightDestination = true;
                 nodeInfo.objectOrientation = (val%10);
                 this._lightDest = nodeInfo;
-              } else if (val == 101 || val == 102 || val == 103 || val == 104) {
+              } else if (val === 101 || val === 102 || val === 103 || val === 104) {
                 nodeInfo.hasDiamond = true;
                 nodeInfo.objectOrientation = (val%10);
-              } else if (val == 31) {
+              } else if (val === 31) {
                 nodeInfo.hasLightObstacle = true;
                 nodeInfo.objectOrientation = (val%10);
               }
@@ -169,7 +169,6 @@ export class GameState {
             let srcNode = this._nodes[lightSourceY][lightSourceX];
             srcNode.isLit = true;
             srcNode.laserOrientation[srcNode.objectOrientation-1] = true;
-            console.log("LS = ",srcNode.x,",",srcNode.y," -- ", srcNode.laserOrientation);
         }
     }
 
@@ -200,7 +199,7 @@ export class GameState {
 
         this._nodes[y][x].isLit = true;
         
-        if(currX == this._lightDest?.x && currY == this._lightDest.y) {
+        if(currX === this._lightDest?.x && currY === this._lightDest.y) {
           this._isSolved = true;
           return;
         }
@@ -209,9 +208,9 @@ export class GameState {
 
         let lightSourceDir = 0; // where is the light coming from in this cell
 
-        if(dir == 1) { lightSourceDir = 3; }
-        else if ( dir == 2) { lightSourceDir = 4; }
-        else if ( dir == 3) { lightSourceDir = 1; }
+        if(dir === 1) { lightSourceDir = 3; }
+        else if ( dir === 2) { lightSourceDir = 4; }
+        else if ( dir === 3) { lightSourceDir = 1; }
         else { lightSourceDir = 2; }
         
         if(node.hasDiamond) {
@@ -236,14 +235,12 @@ export class GameState {
                 //set laser beam directions explicitly
                 node.laserOrientation[dir-1] = true;
                 node.laserOrientation[lightSourceDir-1] = true;
-
-                console.log("LS = ",node.x,",",node.y," -- ", node.laserOrientation);
             }
         }
 
-        if(dir == 1) { nextY = currY-1;  }
-        else if ( dir == 2) { nextX = currX+1;  }
-        else if ( dir == 3) { nextY = currY+1;  }
+        if(dir === 1) { nextY = currY-1;  }
+        else if ( dir === 2) { nextX = currX+1;  }
+        else if ( dir === 3) { nextY = currY+1;  }
         else { nextX = currX-1;  }
         
         this.__computePathCore(nextX, nextY, dir, depthCount);
